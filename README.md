@@ -1,10 +1,14 @@
+[Português](https://github.com/gutomec/notebooklm-automation-site/blob/main/README.md) | [English](https://github.com/gutomec/notebooklm-automation-site/blob/main/README.en.md) | [Español](https://github.com/gutomec/notebooklm-automation-site/blob/main/README.es.md) | [Français](https://github.com/gutomec/notebooklm-automation-site/blob/main/README.fr.md) | [Deutsch](https://github.com/gutomec/notebooklm-automation-site/blob/main/README.de.md) | [中文](https://github.com/gutomec/notebooklm-automation-site/blob/main/README.zh.md)
+
+---
+
 # 🤖 NotebookLM Automation Squad
 
 ### Transforme qualquer fonte em 10 formatos de conteúdo profissional — com um comando.
 
-[![Comprar — $67](https://img.shields.io/badge/Comprar_Agora-$67-7c5cfc?style=for-the-badge&logo=gumroad&logoColor=white)](https://guto.gumroad.com/l/notebooklm-squad)
-[![10 Tipos](https://img.shields.io/badge/10_tipos_de_conteúdo-34d399?style=for-the-badge)](https://guto.gumroad.com/l/notebooklm-squad)
-[![50+ Idiomas](https://img.shields.io/badge/50+_idiomas-22d3ee?style=for-the-badge)](https://guto.gumroad.com/l/notebooklm-squad)
+[![Comprar — $67](https://img.shields.io/badge/Comprar_Agora-$67-7c5cfc?style=for-the-badge)](https://squads.sh/pt/gutomec/notebooklm-automation/notebooklm-automation)
+[![10 Tipos](https://img.shields.io/badge/10_tipos_de_conteúdo-34d399?style=for-the-badge)](https://squads.sh/pt/gutomec/notebooklm-automation/notebooklm-automation)
+[![50+ Idiomas](https://img.shields.io/badge/50+_idiomas-22d3ee?style=for-the-badge)](https://squads.sh/pt/gutomec/notebooklm-automation/notebooklm-automation)
 
 ---
 
@@ -231,7 +235,7 @@ rlhf-review/
 
 > Ratio de 36:1. Cada dólar investido retorna $36 em valor.
 
-### [→ Quero Meus 6 Agentes de IA por $67](https://guto.gumroad.com/l/notebooklm-squad)
+### [→ Quero Meus 6 Agentes de IA por $67](https://squads.sh/pt/gutomec/notebooklm-automation/notebooklm-automation)
 
 ---
 
@@ -313,7 +317,7 @@ A cada semana que passa sem automatizar, você **perde**:
 
 **$67 é menos que uma hora de consultoria.** O squad economiza centenas de horas por ano.
 
-### [→ Começar Agora — $67](https://guto.gumroad.com/l/notebooklm-squad)
+### [→ Começar Agora — $67](https://squads.sh/pt/gutomec/notebooklm-automation/notebooklm-automation)
 
 *Pagamento único · Acesso vitalício · Garantia 30 dias · Atualizações incluídas*
 
@@ -326,7 +330,7 @@ MIT — © 2026 Luiz Gustavo Vieira Rodrigues ([@gutomec](https://github.com/gut
 ---
 
 <p align="center">
-  <a href="https://guto.gumroad.com/l/notebooklm-squad">
+  <a href="https://squads.sh/pt/gutomec/notebooklm-automation/notebooklm-automation">
     <img src="https://img.shields.io/badge/🤖_Quero_Meus_6_Agentes_de_IA-$67-7c5cfc?style=for-the-badge&logoColor=white" alt="Comprar">
   </a>
 </p>
