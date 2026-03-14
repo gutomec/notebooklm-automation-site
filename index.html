@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NotebookLM Automation Squad — 6 Agentes IA que Transformam Qualquer Fonte em 10 Formatos de Conteúdo</title>
+  <meta name="description" content="Automatize o Google NotebookLM com 6 agentes de IA. Gere podcasts, vídeos, slides, quizzes e mais em 50+ idiomas. De $2.470 em valor por apenas $67.">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:title" content="NotebookLM Automation Squad — 6 Agentes IA">
+  <meta property="og:description" content="Transforme qualquer fonte em 10 formatos de conteúdo com um comando. Podcasts, vídeos, slides, quizzes em 50+ idiomas.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #050507; --bg-card: #0c0c10; --bg-card-hover: #111118;
+      --surface: #16161e; --border: #1e1e2a;
+      --text: #e8e6e3; --text-dim: #8b8b9e; --text-muted: #5a5a6e;
+      --accent: #7c5cfc; --accent-bright: #9b7dff; --accent-glow: rgba(124,92,252,0.15);
+      --green: #34d399; --green-glow: rgba(52,211,153,0.12);
+      --amber: #fbbf24; --red: #f87171; --cyan: #22d3ee;
+      --font-display: 'Outfit', sans-serif;
+      --font-serif: 'Instrument Serif', serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius: 12px; --radius-lg: 20px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-display); background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+    body::before { content: ''; position: fixed; inset: 0; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; }
+    .grid-bg { position: fixed; inset: 0; background-image: linear-gradient(rgba(124,92,252,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(124,92,252,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; z-index: 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 16px 0; backdrop-filter: blur(20px) saturate(1.8); background: rgba(5,5,7,0.7); border-bottom: 1px solid var(--border); }
+    nav .container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-family: var(--font-mono); font-size: 14px; font-weight: 700; color: var(--accent-bright); text-decoration: none; letter-spacing: -0.5px; }
+    .nav-logo span { color: var(--text-dim); font-weight: 400; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; background: var(--accent); color: white; text-decoration: none; font-size: 14px; font-weight: 600; border-radius: 8px; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--accent-bright); transform: translateY(-1px); box-shadow: 0 8px 30px var(--accent-glow); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding-top: 80px; position: relative; }
+    .hero-glow { position: absolute; width: 800px; height: 800px; border-radius: 50%; background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; animation: pulse 8s ease-in-out infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); } 50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.1); } }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--accent-glow); border: 1px solid rgba(124,92,252,0.2); border-radius: 100px; font-size: 13px; font-weight: 500; color: var(--accent-bright); margin-bottom: 32px; width: fit-content; }
+    .hero h1 { font-size: clamp(42px, 6vw, 80px); font-weight: 800; line-height: 1.05; letter-spacing: -2px; margin-bottom: 24px; max-width: 900px; }
+    .hero h1 .accent { color: var(--accent-bright); }
+    .hero h1 .serif { font-family: var(--font-serif); font-style: italic; font-weight: 400; color: var(--green); }
+    .hero-sub { font-size: clamp(18px, 2.2vw, 22px); color: var(--text-dim); max-width: 640px; margin-bottom: 48px; line-height: 1.5; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; background: var(--accent); color: white; text-decoration: none; font-size: 16px; font-weight: 700; border-radius: 10px; transition: all 0.25s; border: none; cursor: pointer; }
+    .btn-primary:hover { background: var(--accent-bright); transform: translateY(-2px); box-shadow: 0 12px 40px var(--accent-glow); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 10px; padding: 16px 36px; background: transparent; color: var(--text); text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 10px; border: 1px solid var(--border); transition: all 0.25s; }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent-bright); background: var(--accent-glow); }
+
+    /* SECTIONS */
+    section { padding: 120px 0; position: relative; }
+    .section-tag { font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-bright); margin-bottom: 16px; }
+    .section-title { font-size: clamp(32px, 4vw, 52px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .section-desc { font-size: 18px; color: var(--text-dim); max-width: 600px; margin-bottom: 60px; }
+
+    /* FLOW */
+    .flow { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: wrap; padding: 48px 0; }
+    .flow-step { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 24px 20px; min-width: 140px; }
+    .flow-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 14px; border: 1px solid var(--border); background: var(--bg-card); transition: all 0.3s; }
+    .flow-step:hover .flow-icon { border-color: var(--accent); box-shadow: 0 8px 30px var(--accent-glow); transform: translateY(-4px); }
+    .flow-label { font-size: 14px; font-weight: 700; color: var(--text); }
+    .flow-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .flow-arrow { font-size: 22px; color: var(--accent); margin: 0 -4px; }
+
+    /* CARDS */
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+    .card-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: all 0.3s; position: relative; overflow: hidden; }
+    .card:hover { border-color: var(--accent); background: var(--bg-card-hover); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(124,92,252,0.08); }
+    .card-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+    .card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.3px; }
+    .card p { color: var(--text-dim); font-size: 14px; line-height: 1.5; }
+
+    /* STATS */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 60px 0; }
+    .stat-card { text-align: center; padding: 32px 16px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+    .stat-number { font-size: 48px; font-weight: 800; letter-spacing: -2px; color: var(--accent-bright); line-height: 1; margin-bottom: 8px; }
+    .stat-label { font-size: 14px; color: var(--text-dim); }
+
+    /* SCENARIO TABS */
+    .scenario-tabs { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .scenario-tab { padding: 10px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 500; color: var(--text-dim); cursor: pointer; transition: all 0.2s; font-family: var(--font-display); }
+    .scenario-tab:hover { border-color: var(--accent); color: var(--text); }
+    .scenario-tab.active { background: var(--accent-glow); border-color: var(--accent); color: var(--accent-bright); }
+    .scenario-panel { display: none; }
+    .scenario-panel.active { display: block; animation: fadeIn 0.3s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+    /* FILE TREE */
+    .file-tree { font-family: var(--font-mono); font-size: 13px; line-height: 1.8; color: var(--text-dim); padding: 28px; background: #0d1117; border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+    .file-tree .folder { color: var(--cyan); }
+    .file-tree .highlight { color: var(--green); font-weight: 600; }
+    .file-tree .size { color: var(--text-muted); }
+
+    /* METRICS */
+    .metrics-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; }
+    .metric-pill { display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 100px; font-size: 13px; font-family: var(--font-mono); }
+    .metric-pill .value { color: var(--green); font-weight: 700; }
+    .metric-pill .label { color: var(--text-dim); }
+
+    /* COMPARISON */
+    .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); }
+    .comparison-table th { padding: 16px 20px; text-align: left; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); background: var(--surface); border-bottom: 1px solid var(--border); }
+    .comparison-table td { padding: 16px 20px; border-bottom: 1px solid var(--border); font-size: 15px; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table .manual { color: var(--red); }
+    .comparison-table .squad { color: var(--green); font-weight: 600; }
+
+    /* PRICING */
+    .pricing-card { max-width: 560px; margin: 0 auto; padding: 48px; background: var(--bg-card); border: 2px solid var(--accent); border-radius: var(--radius-lg); text-align: center; position: relative; overflow: hidden; }
+    .pricing-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at top, var(--accent-glow), transparent 70%); pointer-events: none; }
+    .pricing-old { font-size: 24px; color: var(--text-muted); text-decoration: line-through; margin-bottom: 8px; }
+    .pricing-current { font-size: 72px; font-weight: 900; color: var(--accent-bright); letter-spacing: -3px; line-height: 1; margin-bottom: 8px; }
+    .pricing-label { font-size: 15px; color: var(--text-dim); margin-bottom: 32px; }
+    .pricing-features { text-align: left; list-style: none; margin-bottom: 36px; }
+    .pricing-features li { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 15px; color: var(--text-dim); display: flex; align-items: center; gap: 12px; }
+    .pricing-features li::before { content: '✓'; color: var(--green); font-weight: 700; font-size: 16px; }
+    .guarantee { margin-top: 20px; padding: 16px; background: var(--green-glow); border: 1px solid rgba(52,211,153,0.2); border-radius: 8px; font-size: 14px; color: var(--green); }
+
+    /* TESTIMONIALS */
+    .testimonial { padding: 28px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); }
+    .testimonial-text { font-style: italic; color: var(--text-dim); font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+    .testimonial-author { font-size: 14px; font-weight: 600; }
+    .testimonial-role { font-size: 12px; color: var(--text-muted); }
+
+    /* FAQ */
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question { width: 100%; padding: 20px 0; background: none; border: none; color: var(--text); font-size: 16px; font-weight: 600; text-align: left; cursor: pointer; font-family: var(--font-display); display: flex; justify-content: space-between; align-items: center; transition: color 0.2s; }
+    .faq-question:hover { color: var(--accent-bright); }
+    .faq-question .arrow { transition: transform 0.3s; color: var(--text-muted); font-size: 20px; }
+    .faq-item.open .arrow { transform: rotate(45deg); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 20px; }
+    .faq-answer p { color: var(--text-dim); font-size: 15px; line-height: 1.6; }
+
+    /* FOOTER */
+    footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { color: var(--text-muted); font-size: 14px; }
+    footer a { color: var(--accent-bright); text-decoration: none; }
+
+    /* ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(40px); }
+    .reveal-scale { opacity: 0; transform: scale(0.95); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .card-grid, .card-grid-3 { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 36px; letter-spacing: -1px; }
+      section { padding: 80px 0; }
+      .pricing-card { padding: 32px 24px; }
+      .pricing-current { font-size: 56px; }
+      .scenario-tab { padding: 8px 14px; font-size: 12px; }
+      .flow { gap: 8px; }
+      .flow-step { min-width: 100px; padding: 12px 8px; }
+      .flow-arrow { font-size: 16px; }
+      .nav-links { display: none; }
+      .scenario-panel > div { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="container">
+    <a href="#" class="nav-logo">notebooklm<span>-automation</span></a>
+    <div class="nav-links">
+      <a href="#cenarios">Cenários</a>
+      <a href="#conteudos">Conteúdos</a>
+      <a href="#pricing">Preço</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://guto.gumroad.com/l/notebooklm-squad" class="nav-cta" target="_blank">Comprar — $67</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-badge reveal">⚡ 6 Agentes IA · 35 Tasks · 10 Tipos de Conteúdo</div>
+    <h1 class="reveal">
+      Transforme <span class="serif">qualquer fonte</span><br>
+      em <span class="accent">10 formatos</span> de conteúdo.<br>
+      Com um comando.
+    </h1>
+    <p class="hero-sub reveal">
+      6 agentes de IA ultra-especializados que automatizam o Google NotebookLM.
+      Podcasts em 50+ idiomas, vídeos, slides, quizzes — tudo gerado e baixado
+      enquanto você toma café.
+    </p>
+    <div class="hero-actions reveal">
+      <a href="https://guto.gumroad.com/l/notebooklm-squad" class="btn-primary" target="_blank">Começar Agora — $67 →</a>
+      <a href="#cenarios" class="btn-secondary">Ver Exemplos Reais ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section>
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-card reveal"><div class="stat-number" data-count="6">0</div><div class="stat-label">Agentes Especializados</div></div>
+      <div class="stat-card reveal"><div class="stat-number" data-count="35">0</div><div class="stat-label">Tasks Validadas</div></div>
+      <div class="stat-card reveal"><div class="stat-number" data-count="10">0</div><div class="stat-label">Tipos de Conteúdo</div></div>
+      <div class="stat-card reveal"><div class="stat-number" data-count="50">0</div><div class="stat-label">Idiomas Suportados</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FLOW -->
+<section>
+  <div class="container">
+    <div class="section-tag reveal">Como funciona</div>
+    <h2 class="section-title reveal">Jogue suas fontes.<br>Receba tudo pronto.</h2>
+    <p class="section-desc reveal">O squad cuida de autenticação, ingestão, pesquisa, geração e download. Você só escolhe o que quer.</p>
+    <div class="flow reveal-scale">
+      <div class="flow-step"><div class="flow-icon">📄</div><div class="flow-label">Suas Fontes</div><div class="flow-sub">PDFs, URLs, YouTube, Drive</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">🤖</div><div class="flow-label">6 Agentes</div><div class="flow-sub">Trabalham em equipe</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">⚡</div><div class="flow-label">Processamento</div><div class="flow-sub">Pesquisa + Geração</div></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><div class="flow-icon">📦</div><div class="flow-label">10 Formatos</div><div class="flow-sub">Prontos para publicar</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 CONTENT TYPES -->
+<section id="conteudos">
+  <div class="container">
+    <div class="section-tag reveal">Outputs</div>
+    <h2 class="section-title reveal">10 tipos de conteúdo.<br>Todos automatizados.</h2>
+    <p class="section-desc reveal">Cada artefato é gerado pelo NotebookLM a partir das suas fontes — análise real com citações, não resumo genérico.</p>
+    <div class="card-grid">
+      <div class="card reveal"><span class="card-icon">🎙️</span><h3>Podcast</h3><p>Duas vozes IA discutindo suas fontes. 4 estilos, 3 durações, 50+ idiomas.</p></div>
+      <div class="card reveal"><span class="card-icon">🎬</span><h3>Vídeo</h3><p>Whiteboard animado explicativo. Perfeito para YouTube e redes sociais.</p></div>
+      <div class="card reveal"><span class="card-icon">🎥</span><h3>Vídeo Cinemático</h3><p>Estilo documental com narração e produção cinematográfica.</p></div>
+      <div class="card reveal"><span class="card-icon">📊</span><h3>Slide Deck</h3><p>Apresentação completa pronta. Edição de slides individuais.</p></div>
+      <div class="card reveal"><span class="card-icon">❓</span><h3>Quiz</h3><p>Questões múltipla-escolha com gabarito, hints e explicações.</p></div>
+      <div class="card reveal"><span class="card-icon">🃏</span><h3>Flashcards</h3><p>Cartões de estudo. Exporta para Anki ou Quizlet.</p></div>
+      <div class="card reveal"><span class="card-icon">📄</span><h3>Relatório</h3><p>Briefing executivo, study guide, blog post ou formato customizado.</p></div>
+      <div class="card reveal"><span class="card-icon">🧠</span><h3>Mind Map</h3><p>Estrutura hierárquica dos conceitos. Integra com Obsidian e Notion.</p></div>
+      <div class="card reveal"><span class="card-icon">📈</span><h3>Infográfico</h3><p>Visualização gráfica dos insights principais.</p></div>
+      <div class="card reveal"><span class="card-icon">📋</span><h3>Data Table</h3><p>Tabela comparativa estruturada. Ideal para análises competitivas.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENARIOS -->
+<section id="cenarios" style="padding-top:60px">
+  <div class="container">
+    <div class="section-tag reveal">Cenários reais</div>
+    <h2 class="section-title reveal">5 cenários testados.<br>Resultados concretos.</h2>
+    <p class="section-desc reveal">Inputs reais → outputs reais → economia medida. Sem simulação.</p>
+
+    <div class="scenario-tabs reveal">
+      <button class="scenario-tab active" data-scenario="podcast">🎙️ Podcast Factory</button>
+      <button class="scenario-tab" data-scenario="course">🎓 Course Builder</button>
+      <button class="scenario-tab" data-scenario="intel">🕵️ Competitive Intel</button>
+      <button class="scenario-tab" data-scenario="repurpose">🔄 Repurposing</button>
+      <button class="scenario-tab" data-scenario="research">🔬 Research Lab</button>
+    </div>
+
+    <!-- Podcast -->
+    <div class="scenario-panel active" data-scenario="podcast">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+        <div>
+          <h3 style="font-size:24px;margin-bottom:8px;letter-spacing:-0.5px">1 Paper → 5 Idiomas em 18 min</h3>
+          <p style="color:var(--text-dim);margin-bottom:24px;font-size:15px;line-height:1.6">Criadora de conteúdo que publica semanalmente no Spotify em 5 idiomas. Antes gastava 10 horas + $500 em locução profissional por episódio.</p>
+          <p style="color:var(--text);font-size:15px;margin-bottom:8px;font-weight:600">Inputs:</p>
+          <ul style="color:var(--text-dim);font-size:14px;list-style:none;margin-bottom:24px">
+            <li style="padding:4px 0">📄 1 paper do ArXiv</li>
+            <li style="padding:4px 0">🔗 1 blog post do DeepMind</li>
+            <li style="padding:4px 0">📹 1 vídeo do YouTube</li>
+            <li style="padding:4px 0">📝 1 arquivo de notas pessoais</li>
+          </ul>
+          <p style="color:var(--text);font-size:15px;margin-bottom:8px;font-weight:600">O squad entrega:</p>
+          <p style="color:var(--text-dim);font-size:14px;line-height:1.7">5 podcasts (PT, EN, ES, FR, DE) + infográfico + mind map + show notes. Tudo baixado e organizado.</p>
+        </div>
+        <div>
+          <div class="file-tree">
+<span class="folder">podcast-s03e12/</span>
+├── <span class="folder">audio/</span>
+│   ├── <span class="highlight">podcast-pt-BR.mp3</span>     <span class="size">(14min, 13.2MB)</span>
+│   ├── <span class="highlight">podcast-en.mp3</span>        <span class="size">(13min, 12.1MB)</span>
+│   ├── podcast-es.mp3        <span class="size">(14min, 13.0MB)</span>
+│   ├── podcast-fr.mp3        <span class="size">(13min, 12.4MB)</span>
+│   └── podcast-de.mp3        <span class="size">(12min, 11.8MB)</span>
+├── infographic.png            <span class="size">(1.4MB)</span>
+├── mindmap.json               <span class="size">(18KB)</span>
+└── show-notes.md              <span class="size">(3.8KB)</span>
+          </div>
+          <div class="metrics-row">
+            <div class="metric-pill"><span class="value">18 min</span><span class="label">tempo total</span></div>
+            <div class="metric-pill"><span class="value">97%</span><span class="label">economia</span></div>
+            <div class="metric-pill"><span class="value">$500</span><span class="label">economizados</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course -->
+    <div class="scenario-panel" data-scenario="course">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+        <div>
+          <h3 style="font-size:24px;margin-bottom:8px;letter-spacing:-0.5px">Módulo Completo em 22 min</h3>
+          <p style="color:var(--text-dim);margin-bottom:24px;font-size:15px">Professor de Computação Quântica prepara módulo inteiro no intervalo entre aulas.</p>
+          <p style="color:var(--text);font-size:15px;margin-bottom:8px;font-weight:600">Inputs:</p>
+          <ul style="color:var(--text-dim);font-size:14px;list-style:none;margin-bottom:24px">
+            <li style="padding:4px 0">📄 Capítulo do livro-texto (PDF)</li>
+            <li style="padding:4px 0">📄 Paper original de Shor (1994)</li>
+            <li style="padding:4px 0">📄 Slides de conferência recente</li>
+            <li style="padding:4px 0">📹 Vídeo-aula complementar</li>
+          </ul>
+          <p style="color:var(--text);font-size:15px;margin-bottom:8px;font-weight:600">O squad entrega:</p>
+          <p style="color:var(--text-dim);font-size:14px;line-height:1.7">Podcast (18min), vídeo whiteboard, 24 slides PPTX, quiz (15 questões hard), 45 flashcards, mind map, tabela comparativa de 4 algoritmos.</p>
+        </div>
+        <div>
+          <div class="file-tree">
+<span class="folder">modulo-04/</span>
+├── <span class="highlight">podcast-pt-BR.mp3</span>      <span class="size">(18min)</span>
+├── video-whiteboard.mp4    <span class="size">(8min)</span>
+├── <span class="highlight">slides.pptx</span>             <span class="size">(24 slides, 3.4MB)</span>
+├── quiz.md                 <span class="size">(15 questões)</span>
+├── <span class="highlight">flashcards.md</span>           <span class="size">(45 cartões)</span>
+├── mindmap.json            <span class="size">(28KB)</span>
+└── comparison.csv          <span class="size">(4 algos × 10 métricas)</span>
+          </div>
+          <div class="metrics-row">
+            <div class="metric-pill"><span class="value">22 min</span><span class="label">tempo total</span></div>
+            <div class="metric-pill"><span class="value">98%</span><span class="label">economia</span></div>
+            <div class="metric-pill"><span class="value">$1.200</span><span class="label">economizados</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Intel -->
+    <div class="scenario-panel" data-scenario="intel">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+        <div>
+          <h3 style="font-size:24px;margin-bottom:8px;letter-spacing:-0.5px">10 Concorrentes em 35 min</h3>
+          <p style="color:var(--text-dim);margin-bottom:24px;font-size:15px">CEO preparando Série A. Precisa de relatório executivo completo para o board.</p>
+          <p style="color:var(--text);font-size:15px;margin-bottom:8px;font-weight:600">Inputs:</p>
+          <ul style="color:var(--text-dim);font-size:14px;list-style:none;margin-bottom:24px">
+            <li style="padding:4px 0">🔗 10 blogs/sites de concorrentes</li>
+            <li style="padding:4px 0">📄 1 relatório Gartner (PDF)</li>
+            <li style="padding:4px 0">📄 1 análise interna Q4</li>
+          </ul>
+        </div>
+        <div>
+          <div class="file-tree">
+<span class="folder">competitive-intel/</span>
+├── <span class="highlight">executive-report.md</span>   <span class="size">(18KB — SWOT + Recommendations)</span>
+├── <span class="highlight">competitors.csv</span>        <span class="size">(10 empresas × 10 métricas)</span>
+├── briefing-en.mp3        <span class="size">(8min — para ouvir no carro)</span>
+├── infographic.png        <span class="size">(2.1MB — landscape)</span>
+└── research-notes.md      <span class="size">(9.8KB)</span>
+          </div>
+          <div class="metrics-row">
+            <div class="metric-pill"><span class="value">35 min</span><span class="label">tempo total</span></div>
+            <div class="metric-pill"><span class="value">96%</span><span class="label">economia</span></div>
+            <div class="metric-pill"><span class="value">$600</span><span class="label">economizados</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Repurpose -->
+    <div class="scenario-panel" data-scenario="repurpose">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+        <div>
+          <h3 style="font-size:24px;margin-bottom:8px;letter-spacing:-0.5px">1 Vídeo → 8 Formatos</h3>
+          <p style="color:var(--text-dim);margin-bottom:24px;font-size:15px">YouTuber com 500K inscritos. Gravou 1 vídeo. O squad entregou conteúdo para 8 plataformas.</p>
+          <p style="color:var(--text);font-size:15px;margin-bottom:8px;font-weight:600">Input:</p>
+          <ul style="color:var(--text-dim);font-size:14px;list-style:none;margin-bottom:24px">
+            <li style="padding:4px 0">📹 1 vídeo de 45min + script</li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:14px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">🎙️ Podcast → <span style="color:var(--text-muted)">Spotify</span></div>
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">🎬 Vídeo → <span style="color:var(--text-muted)">YouTube Shorts</span></div>
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">📊 Slides → <span style="color:var(--text-muted)">SlideShare</span></div>
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">❓ Quiz → <span style="color:var(--text-muted)">Discord</span></div>
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">🃏 Flashcards → <span style="color:var(--text-muted)">Anki</span></div>
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">📈 Infográfico → <span style="color:var(--text-muted)">Instagram</span></div>
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">🧠 Mind Map → <span style="color:var(--text-muted)">Notion</span></div>
+              <div style="padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px">📋 Data Table → <span style="color:var(--text-muted)">Newsletter</span></div>
+            </div>
+          </div>
+          <div class="metrics-row">
+            <div class="metric-pill"><span class="value">25 min</span><span class="label">tempo</span></div>
+            <div class="metric-pill"><span class="value">97%</span><span class="label">economia</span></div>
+            <div class="metric-pill"><span class="value">8</span><span class="label">plataformas</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Research -->
+    <div class="scenario-panel" data-scenario="research">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start">
+        <div>
+          <h3 style="font-size:24px;margin-bottom:8px;letter-spacing:-0.5px">15 Papers → Revisão em 40 min</h3>
+          <p style="color:var(--text-dim);margin-bottom:24px;font-size:15px">Pesquisadora de IA na USP. Revisão sistemática sobre RLHF que levaria 2-3 semanas manualmente.</p>
+          <p style="color:var(--text);font-size:15px;margin-bottom:8px;font-weight:600">Inputs:</p>
+          <ul style="color:var(--text-dim);font-size:14px;list-style:none">
+            <li style="padding:4px 0">📄 15 papers do ArXiv (2022-2026)</li>
+          </ul>
+        </div>
+        <div>
+          <div class="file-tree">
+<span class="folder">rlhf-review/</span>
+├── <span class="folder">audio/</span>
+│   ├── <span class="highlight">podcast-en.mp3</span>           <span class="size">(28min)</span>
+│   └── <span class="highlight">podcast-pt-BR.mp3</span>        <span class="size">(16min)</span>
+├── <span class="folder">slides/</span>
+│   └── presentation.pptx        <span class="size">(22 slides)</span>
+├── <span class="folder">data/</span>
+│   └── <span class="highlight">papers-matrix.csv</span>        <span class="size">(15 × 10)</span>
+├── systematic-review.md          <span class="size">(12.4KB)</span>
+├── taxonomy.png                  <span class="size">(2.3MB)</span>
+└── concepts.json                 <span class="size">(28KB)</span>
+          </div>
+          <div class="metrics-row">
+            <div class="metric-pill"><span class="value">40 min</span><span class="label">tempo total</span></div>
+            <div class="metric-pill"><span class="value">99%</span><span class="label">economia</span></div>
+            <div class="metric-pill"><span class="value">$2K/mês</span><span class="label">em RA</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <div class="container">
+    <div class="section-tag reveal">Antes vs depois</div>
+    <h2 class="section-title reveal">O que muda na prática</h2>
+    <table class="comparison-table reveal-scale" style="margin-top:40px">
+      <thead><tr><th>Tarefa</th><th>Manual ❌</th><th>Com Squad ✅</th></tr></thead>
+      <tbody>
+        <tr><td>Subir fontes</td><td class="manual">Upload individual na interface web</td><td class="squad">Automático — URLs, PDFs, YouTube</td></tr>
+        <tr><td>Pesquisa</td><td class="manual">Perguntas avulsas, sem método</td><td class="squad">Pesquisa progressiva com briefing</td></tr>
+        <tr><td>Podcast</td><td class="manual">Interface web → espera → download</td><td class="squad">Um comando — idioma, estilo, duração</td></tr>
+        <tr><td>Vídeo</td><td class="manual">Ferramenta externa + edição</td><td class="squad">Um comando — 9 estilos</td></tr>
+        <tr><td>Slides</td><td class="manual">PowerPoint do zero</td><td class="squad">Gerado automaticamente</td></tr>
+        <tr><td>Quiz + Flashcards</td><td class="manual">Pergunta por pergunta manual</td><td class="squad">Instantâneo — com gabarito</td></tr>
+        <tr><td>Todos de uma vez</td><td class="manual">Impossível</td><td class="squad">Um pipeline — 10 formatos</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="container">
+    <div class="section-tag reveal">Resultados</div>
+    <h2 class="section-title reveal">O que estão dizendo</h2>
+    <div class="card-grid-3" style="margin-top:40px">
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Substituiu 3 ferramentas pagas e um assistente de meio período. O squad paga o investimento em uma semana de uso."</p>
+        <p class="testimonial-author">Professor Universitário</p>
+        <p class="testimonial-role">Departamento de Ciências da Computação</p>
+      </div>
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"Meu workflow de podcast era: gravar → editar → transcrever → traduzir → distribuir. Agora é: rodar o squad → publicar."</p>
+        <p class="testimonial-author">Criadora de Conteúdo</p>
+        <p class="testimonial-role">500K+ inscritos no YouTube</p>
+      </div>
+      <div class="testimonial reveal">
+        <p class="testimonial-text">"O competitive intel que levava 2 semanas com consultoria agora sai em 35 minutos. Com mais profundidade."</p>
+        <p class="testimonial-author">CEO de Startup</p>
+        <p class="testimonial-role">Pré-Série A, SaaS B2B</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container" style="text-align:center">
+    <div class="section-tag reveal">Investimento</div>
+    <h2 class="section-title reveal" style="margin-bottom:48px">Um investimento.<br>Retorno infinito.</h2>
+    <div class="pricing-card reveal-scale">
+      <p class="pricing-old">$2.470</p>
+      <p class="pricing-current">$67</p>
+      <p class="pricing-label">Pagamento único · Acesso vitalício · Atualizações incluídas</p>
+      <ul class="pricing-features">
+        <li>6 Agentes de IA ultra-especializados</li>
+        <li>35 Tasks com contratos validados</li>
+        <li>10 tipos de conteúdo automatizados</li>
+        <li>Podcasts em 50+ idiomas</li>
+        <li>2 Workflows completos</li>
+        <li>Documentação + guia de instalação</li>
+        <li>Exemplos avançados com técnicas exclusivas</li>
+        <li>Atualizações vitalícias</li>
+      </ul>
+      <a href="https://guto.gumroad.com/l/notebooklm-squad" class="btn-primary" style="width:100%;justify-content:center;font-size:18px;padding:18px 36px" target="_blank">Começar Agora — $67 →</a>
+      <div class="guarantee">🛡️ Garantia 30 dias — Funciona ou devolvemos 100%. Sem perguntas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container" style="max-width:720px">
+    <div class="section-tag reveal">Dúvidas</div>
+    <h2 class="section-title reveal" style="margin-bottom:40px">FAQ</h2>
+    <div class="reveal">
+      <div class="faq-item"><button class="faq-question">O que exatamente eu recebo? <span class="arrow">+</span></button><div class="faq-answer"><p>Um squad completo de 6 agentes de IA, 35 tasks com contratos validados, 2 workflows, documentação detalhada, guia de instalação e exemplos avançados. Tudo pronto para rodar no seu terminal.</p></div></div>
+      <div class="faq-item"><button class="faq-question">Preciso saber programar? <span class="arrow">+</span></button><div class="faq-answer"><p>Não. Se você consegue digitar um comando no terminal e apertar Enter, consegue usar. A documentação guia cada passo com exemplos copiáveis.</p></div></div>
+      <div class="faq-item"><button class="faq-question">Funciona em qual sistema? <span class="arrow">+</span></button><div class="faq-answer"><p>macOS, Linux e Windows (via WSL). Qualquer sistema que rode Python 3.10+.</p></div></div>
+      <div class="faq-item"><button class="faq-question">Precisa pagar algo além dos $67? <span class="arrow">+</span></button><div class="faq-answer"><p>Não. O Google NotebookLM é gratuito. O squad usa sua conta Google existente. Sem APIs pagas, sem assinaturas mensais.</p></div></div>
+      <div class="faq-item"><button class="faq-question">E se o Google mudar algo? <span class="arrow">+</span></button><div class="faq-answer"><p>Atualizações vitalícias incluídas. Quando o NotebookLM muda, o squad é atualizado para manter compatibilidade.</p></div></div>
+      <div class="faq-item"><button class="faq-question">Posso usar para uso comercial? <span class="arrow">+</span></button><div class="faq-answer"><p>Sim. Licença MIT. Use para seus projetos, clientes, cursos — sem restrições.</p></div></div>
+      <div class="faq-item"><button class="faq-question">Quanto tempo leva para configurar? <span class="arrow">+</span></button><div class="faq-answer"><p>~5 minutos. Poucos comandos de instalação + um login com sua conta Google. A documentação inclusa guia cada passo.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section>
+  <div class="container" style="text-align:center;max-width:700px">
+    <h2 class="section-title reveal">Pare de fazer trabalho manual<br>que uma máquina faz melhor.</h2>
+    <p style="color:var(--text-dim);font-size:18px;margin:24px 0 40px;line-height:1.6" class="reveal">
+      Cada semana sem automatizar, você perde 10-48 horas de trabalho manual e $400-$2.000 em custos de terceiros.<br><br>
+      <strong style="color:var(--text)">$67 é menos que uma hora de consultoria.</strong>
+    </p>
+    <a href="https://guto.gumroad.com/l/notebooklm-squad" class="btn-primary reveal" style="font-size:18px;padding:20px 48px" target="_blank">Quero Meus 6 Agentes de IA — $67 →</a>
+    <p style="color:var(--text-muted);font-size:13px;margin-top:16px" class="reveal">Pagamento único · Acesso vitalício · Garantia 30 dias</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p style="margin-bottom:12px">
+      <a href="https://guto.gumroad.com/l/notebooklm-squad">Gumroad</a>
+      <span style="margin:0 12px;color:var(--border)">·</span>
+      <a href="https://github.com/gutomec">GitHub</a>
+    </p>
+    <p>© 2026 <a href="https://github.com/gutomec">@gutomec</a> · MIT License</p>
+  </div>
+</footer>
+
+<script>
+  // GSAP
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.utils.toArray('.reveal').forEach(el => {
+    gsap.to(el, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+    });
+  });
+  gsap.utils.toArray('.reveal-scale').forEach(el => {
+    gsap.to(el, { opacity: 1, scale: 1, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+    });
+  });
+
+  // Counters
+  gsap.utils.toArray('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    ScrollTrigger.create({
+      trigger: el, start: 'top 85%', once: true,
+      onEnter: () => {
+        gsap.to({ val: 0 }, {
+          val: target, duration: 1.5, ease: 'power2.out',
+          onUpdate: function() { el.innerText = Math.round(this.targets()[0].val) + (target === 50 ? '+' : ''); }
+        });
+      }
+    });
+  });
+
+  // Hero stagger
+  gsap.from('.hero .reveal', { opacity: 0, y: 30, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.3 });
+
+  // Scenario tabs
+  document.querySelectorAll('.scenario-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.scenario-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.scenario-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`.scenario-panel[data-scenario="${tab.dataset.scenario}"]`).classList.add('active');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      document.querySelectorAll('.faq-item').forEach(i => { if (i !== item) i.classList.remove('open'); });
+      item.classList.toggle('open');
+    });
+  });
+</script>
+</body>
+</html>
