@@ -1,0 +1,143 @@
+{
+  "name": "Artificial Intelligence",
+  "children": [
+    {
+      "name": "Core Goals",
+      "children": [
+        {
+          "name": "Reasoning and problem-solving"
+        },
+        {
+          "name": "Knowledge representation"
+        },
+        {
+          "name": "Planning and decision-making"
+        },
+        {
+          "name": "Machine learning"
+        },
+        {
+          "name": "Natural language processing"
+        },
+        {
+          "name": "Perception"
+        },
+        {
+          "name": "Social intelligence"
+        },
+        {
+          "name": "General intelligence (AGI)"
+        }
+      ]
+    },
+    {
+      "name": "Techniques",
+      "children": [
+        {
+          "name": "Search and optimization",
+          "children": [
+            {
+              "name": "State space search"
+            },
+            {
+              "name": "Local search (Gradient descent)"
+            }
+          ]
+        },
+        {
+          "name": "Logic (Formal and Fuzzy)"
+        },
+        {
+          "name": "Probabilistic methods (Bayesian)"
+        },
+        {
+          "name": "Classifiers (SVM, Naive Bayes)"
+        },
+        {
+          "name": "Artificial neural networks"
+        },
+        {
+          "name": "Deep learning"
+        },
+        {
+          "name": "Generative Pre-trained Transformers (GPT)"
+        }
+      ]
+    },
+    {
+      "name": "Applications",
+      "children": [
+        {
+          "name": "Health and medicine"
+        },
+        {
+          "name": "Gaming (Deep Blue, AlphaGo)"
+        },
+        {
+          "name": "Finance"
+        },
+        {
+          "name": "Military (Autonomous weapons)"
+        },
+        {
+          "name": "Generative AI (Text, Image, Video)"
+        },
+        {
+          "name": "Autonomous vehicles"
+        },
+        {
+          "name": "Web search and recommendation"
+        }
+      ]
+    },
+    {
+      "name": "Ethics and Risks",
+      "children": [
+        {
+          "name": "Privacy and copyright"
+        },
+        {
+          "name": "Power and environmental impact"
+        },
+        {
+          "name": "Misinformation and deepfakes"
+        },
+        {
+          "name": "Algorithmic bias and fairness"
+        },
+        {
+          "name": "Transparency (Black box problem)"
+        },
+        {
+          "name": "Technological unemployment"
+        },
+        {
+          "name": "Existential risk and alignment"
+        }
+      ]
+    },
+    {
+      "name": "History and Philosophy",
+      "children": [
+        {
+          "name": "Dartmouth workshop (1956)"
+        },
+        {
+          "name": "AI Winters"
+        },
+        {
+          "name": "Deep learning revolution (2012)"
+        },
+        {
+          "name": "Turing test"
+        },
+        {
+          "name": "Symbolic vs. Sub-symbolic AI"
+        },
+        {
+          "name": "Machine consciousness and sentience"
+        }
+      ]
+    }
+  ]
+}
