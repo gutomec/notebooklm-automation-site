@@ -203,18 +203,18 @@
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="container">
-    <div class="hero-badge reveal">⚡ 6 Agentes IA · 35 Tasks · 10 Tipos de Conteúdo</div>
-    <h1 class="reveal">
+    <div class="hero-badge hero-anim">⚡ 6 Agentes IA · 35 Tasks · 10 Tipos de Conteúdo</div>
+    <h1 class="hero-anim">
       Transforme <span class="serif">qualquer fonte</span><br>
       em <span class="accent">10 formatos</span> de conteúdo.<br>
       Com um comando.
     </h1>
-    <p class="hero-sub reveal">
+    <p class="hero-sub hero-anim">
       6 agentes de IA ultra-especializados que automatizam o Google NotebookLM.
       Podcasts em 50+ idiomas, vídeos, slides, quizzes — tudo gerado e baixado
       enquanto você toma café.
     </p>
-    <div class="hero-actions reveal">
+    <div class="hero-actions hero-anim">
       <a href="https://guto.gumroad.com/l/notebooklm-squad" class="btn-primary" target="_blank">Começar Agora — $67 →</a>
       <a href="#cenarios" class="btn-secondary">Ver Exemplos Reais ↓</a>
     </div>
@@ -601,9 +601,8 @@
     });
   });
 
-  // Hero — force visible then animate
-  document.querySelectorAll('.hero .reveal').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
-  gsap.from('.hero .reveal', { opacity: 0, y: 40, duration: 1, stagger: 0.2, ease: 'power3.out', delay: 0.2 });
+  // Hero stagger — separate class, no conflict with .reveal CSS
+  gsap.from('.hero-anim', { opacity: 0, y: 40, duration: 1, stagger: 0.2, ease: 'power3.out', delay: 0.2 });
 
   // Scenario tabs
   document.querySelectorAll('.scenario-tab').forEach(tab => {
