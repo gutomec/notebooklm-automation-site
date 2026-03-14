@@ -601,8 +601,9 @@
     });
   });
 
-  // Hero stagger
-  gsap.from('.hero .reveal', { opacity: 0, y: 30, duration: 0.8, stagger: 0.15, ease: 'power3.out', delay: 0.3 });
+  // Hero — force visible then animate
+  document.querySelectorAll('.hero .reveal').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; });
+  gsap.from('.hero .reveal', { opacity: 0, y: 40, duration: 1, stagger: 0.2, ease: 'power3.out', delay: 0.2 });
 
   // Scenario tabs
   document.querySelectorAll('.scenario-tab').forEach(tab => {
