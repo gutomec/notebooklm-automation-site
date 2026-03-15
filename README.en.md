@@ -197,9 +197,9 @@ rlhf-review/
 ## 🚫 Who It's NOT For
 
 - ❌ Those without a Google account (NotebookLM is a Google product)
-- ❌ Those expecting a GUI with buttons — this runs in the terminal
+- ❌ Those expecting a GUI with buttons — this runs via AI agents
 - ❌ Those wanting to generate spam or misleading content
-- ❌ Those unwilling to run 3 setup commands
+- ❌ Those not using a compatible coding agent ([skill.sh](https://skill.sh))
 
 ---
 
@@ -265,19 +265,19 @@ If within 30 days you can't generate automated content with the squad, we refund
 <details>
 <summary><strong>What exactly do I get?</strong></summary>
 
-A complete squad of 6 AI agents that automate Google NotebookLM. Includes agents, tasks, workflows, documentation, examples, and installation guide. You run it in your terminal and generate content automatically.
+A complete squad of 6 AI agents that automate Google NotebookLM. Includes agents, tasks, workflows, documentation, examples, and installation guide. Compatible with any coding agent supported by [skill.sh](https://skill.sh) — Claude Code, Codex, Antigravity, Gemini CLI, and more.
 </details>
 
 <details>
 <summary><strong>Do I need to know how to code?</strong></summary>
 
-No. If you can type a command in the terminal and press Enter, you can use the squad. The documentation includes all commands with copy-pasteable examples.
+No. The squad runs inside your preferred coding agent. You describe what you want and the agents do the rest. The documentation guides every step.
 </details>
 
 <details>
 <summary><strong>Which operating systems are supported?</strong></summary>
 
-macOS, Linux, and Windows (via WSL). Any system that runs Python 3.10+.
+macOS, Linux, and Windows. Compatible with any coding agent supported by [skill.sh](https://skill.sh) — including Claude Code, Codex, Antigravity, Gemini CLI, and more.
 </details>
 
 <details>
@@ -295,7 +295,7 @@ Lifetime updates are included. When NotebookLM changes, the squad is updated to 
 <details>
 <summary><strong>How long does setup take?</strong></summary>
 
-~5 minutes. 3 installation commands + a login with your Google account. The documentation guides every step.
+~5 minutes. Quick installation + a login with your Google account. The documentation guides every step.
 </details>
 
 <details>

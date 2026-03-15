@@ -191,9 +191,9 @@ rlhf-review/
 ## 🚫 Pour Qui Ce N'est PAS
 
 - ❌ Ceux sans compte Google (NotebookLM est un produit Google)
-- ❌ Ceux attendant une interface graphique avec boutons — ça tourne dans le terminal
+- ❌ Ceux attendant une interface graphique avec boutons — ça fonctionne via des agents IA
 - ❌ Ceux voulant générer du spam ou du contenu trompeur
-- ❌ Ceux refusant d'exécuter 3 commandes d'installation
+- ❌ Ceux n'utilisant pas un coding agent compatible ([skill.sh](https://skill.sh))
 
 ---
 
@@ -230,19 +230,19 @@ Si dans les 30 jours vous ne parvenez pas à générer du contenu automatisé av
 <details>
 <summary><strong>Qu'est-ce que je reçois exactement ?</strong></summary>
 
-Un squad complet de 6 agents IA qui automatisent Google NotebookLM. Inclut agents, tâches, workflows, documentation, exemples et guide d'installation. Vous l'exécutez dans votre terminal et générez du contenu automatiquement.
+Un squad complet de 6 agents IA qui automatisent Google NotebookLM. Inclut agents, tâches, workflows, documentation, exemples et guide d'installation. Compatible avec tout coding agent supporté par [skill.sh](https://skill.sh) — Claude Code, Codex, Antigravity, Gemini CLI et d'autres.
 </details>
 
 <details>
 <summary><strong>Faut-il savoir programmer ?</strong></summary>
 
-Non. Si vous savez taper une commande dans le terminal et appuyer sur Entrée, vous pouvez utiliser le squad. La documentation inclut toutes les commandes avec des exemples copiables.
+Non. Le squad fonctionne dans votre coding agent préféré. Vous décrivez ce que vous voulez et les agents font le reste. La documentation guide chaque étape.
 </details>
 
 <details>
 <summary><strong>Quels systèmes d'exploitation sont supportés ?</strong></summary>
 
-macOS, Linux et Windows (via WSL). Tout système exécutant Python 3.10+.
+macOS, Linux et Windows. Compatible avec tout coding agent supporté par [skill.sh](https://skill.sh) — y compris Claude Code, Codex, Antigravity, Gemini CLI et d'autres.
 </details>
 
 <details>

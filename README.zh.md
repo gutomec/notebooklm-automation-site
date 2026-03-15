@@ -191,9 +191,9 @@ rlhf-review/
 ## 🚫 不适合谁
 
 - ❌ 没有Google账户的人（NotebookLM是Google产品）
-- ❌ 期望有图形界面按钮的人 — 这在终端中运行
+- ❌ 期望有图形界面按钮的人 — 这通过AI代理运行
 - ❌ 想要生成垃圾或误导性内容的人
-- ❌ 不愿运行3个设置命令的人
+- ❌ 不使用兼容coding agent的人 ([skill.sh](https://skill.sh))
 
 ---
 
@@ -230,19 +230,19 @@ rlhf-review/
 <details>
 <summary><strong>我具体会得到什么？</strong></summary>
 
-一个完整的6个AI代理squad，自动化Google NotebookLM。包括代理、任务、工作流程、文档、示例和安装指南。在终端中运行，自动生成内容。
+一个完整的6个AI代理squad，自动化Google NotebookLM。包括代理、任务、工作流程、文档、示例和安装指南。兼容 [skill.sh](https://skill.sh) 支持的任何coding agent — 包括Claude Code、Codex、Antigravity、Gemini CLI等。
 </details>
 
 <details>
 <summary><strong>需要会编程吗？</strong></summary>
 
-不需要。如果您能在终端中输入命令并按回车键，就能使用squad。文档包含所有可复制粘贴的命令示例。
+不需要。Squad在您喜欢的coding agent中运行。您描述想要什么，代理完成其余工作。文档指导每个步骤。
 </details>
 
 <details>
 <summary><strong>支持哪些操作系统？</strong></summary>
 
-macOS、Linux和Windows（通过WSL）。任何运行Python 3.10+的系统。
+macOS、Linux和Windows。兼容 [skill.sh](https://skill.sh) 支持的任何coding agent — 包括Claude Code、Codex、Antigravity、Gemini CLI等。
 </details>
 
 <details>
